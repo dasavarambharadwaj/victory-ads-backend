@@ -1,6 +1,5 @@
 require('dotenv').config({path:__dirname+"/.env"})
-console.log(process.env)
 const expressServer = require('./services/express-server')
-let server = new expressServer(3000);
+let server = new expressServer(process.env.PORT_NUMBER);
 server.initializeRoutes();
 server.start();
