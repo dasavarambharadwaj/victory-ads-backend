@@ -16,4 +16,18 @@ module.exports=class ConnectDB {
             return [];
         }
     }
+
+    async getDataByTextSearch(database,collection,search) {
+        try {
+            await this.client.connect()
+            let db = this.client.db(database)
+            let collectionData = db.collection(collection)
+            let findResult = await collectionData.find({ $text: { $search: search } }).toArray()
+            return findResult;
+        }
+        catch(err) {
+            console.log(err);
+            return [];
+        }
+    }
 }
