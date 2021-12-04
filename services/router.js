@@ -4,6 +4,7 @@ module.exports = class Routes {
     constructor(app) {
 
         app.get("/customers",this.customer.getCustomers)
+        app.post("/customer", this.customer.addCustomer);
 
     }
 }
