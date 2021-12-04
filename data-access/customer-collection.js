@@ -1,14 +1,25 @@
-const ConnectDB = require('./connect-mongodb')
-const dbDetails = require('../static/databaseConfig.json')
+const { getAllData, getDataByQuery, addDataToCollection } = require("./common-functions");
+const dbDetails = require("../static/databaseConfig.json");
 module.exports = class CustomerCollection {
-    async getCustomersData(searchString){
-        let connection = new ConnectDB();
-        let data= [];
-        if(!searchString) {
-            data = await connection.getAllData(dbDetails.databaseName,dbDetails.customer);
-        } else {
-            data = await connection.getDataByTextSearch(dbDetails.databaseName,dbDetails.customer,searchString)
-        }
-        return data;
+  async getCustomersData(searchString) {
+    let data = [];
+    if (!searchString) {
+      data = await getAllData(dbDetails.databaseName, dbDetails.customer);
+    } else {
+      data = await getDataByQuery(dbDetails.databaseName, dbDetails.customer, {
+        $or: [
+          { name: { $regex: searchString, $options: "i" } },
+          { category: { $regex: searchString, $options: "i" } },
+        ],
+      });
     }
-}
+    return data;
+  }
+  async addCustomer(customerData) {
+    let data;
+    if (customerData) {
+      data = await addDataToCollection(dbDetails.databaseName, dbDetails.customer,customerData);
+    }
+    return data;
+  }
+};
