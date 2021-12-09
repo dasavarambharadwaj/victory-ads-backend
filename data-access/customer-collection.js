@@ -18,7 +18,7 @@ module.exports = class CustomerCollection {
   async addCustomer(customerData) {
     let data;
     if (customerData) {
-      data = await addDataToCollection(dbDetails.databaseName, dbDetails.customer,customerData);
+      data = await addDataToCollection(dbDetails.databaseName, dbDetails.tempCustomer,customerData);
     }
     return data;
   }
