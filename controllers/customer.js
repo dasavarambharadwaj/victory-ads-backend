@@ -5,6 +5,10 @@ module.exports = class Customer {
     let result = await collection.getCustomersData(req.query?.search);
     res.send(result);
   }
+  async getCustomerById(req, res, next) {
+    let result = await collection.getCustomerDataById(req.query?.id);
+    res.send(result);
+  }
   async addCustomer(req, res, next) {
     console.log(req.body);
     let result = await collection.addCustomer(req.body);
