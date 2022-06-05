@@ -5,9 +5,9 @@ const ConnectDB = require("./services/connect-db");
   let connectDB = new ConnectDB();
   let connectionEstablished = await connectDB.testConnection();
   if (connectionEstablished) {
-    global.client = connectDB.client;
+    global.connection = connectDB.connection;
     let server = new expressServer(
-      process.env.PORT_NUMBER,
+      process.env.NODE_PORT,
       process.env.ORIGIN_ADDRESS
     );
     server.start();

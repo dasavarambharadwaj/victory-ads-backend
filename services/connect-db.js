@@ -1,14 +1,25 @@
-const { MongoClient } = require("mongodb");
+var mysql = require('mysql');
 module.exports = class ConnectDB {
   constructor() {
-    this.client = new MongoClient(process.env.DB_URI);
+    this.connection = mysql.createConnection({
+      host: process.env.HOST,
+      port: parseInt(process.env.PORT),
+      user: process.env.MY_SQL_USER,
+      password: process.env.PASSWORD,
+      database: process.env.DB
+    });
   }
   async testConnection() {
-    try {
-      await this.client.connect();
-      return true;
-    } catch (err) {
-      return false;
-    }
+    return await new Promise((resolve,reject)=>{
+      this.connection.connect(function(err){
+        if(err) {
+          console.log("Connection failed")
+          resolve(false)
+        } else {
+          console.log("Connection Succeeded")
+          resolve(true)
+        }
+      });
+    }) 
   }
 };

@@ -1,11 +1,9 @@
-const Customer=require('../controllers/customer');
+// const Customer=require('../controllers/customer');
+const Category = require('../controllers/category')
 module.exports = class Routes {
-    customer=new Customer();
+    category=new Category();
     constructor(app) {
-
-        app.get("/customers",this.customer.getCustomers)
-        app.get("/customerData",this.customer.getCustomerById)
-        app.post("/customer", this.customer.addCustomer);
+        app.get("/categories",this.category.getCustomers)
 
     }
 }
