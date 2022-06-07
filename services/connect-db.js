@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+var mysql = require('mysql2');
 module.exports = class ConnectDB {
   constructor() {
     this.connection = mysql.createConnection({
