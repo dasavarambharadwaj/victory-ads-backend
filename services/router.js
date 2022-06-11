@@ -11,5 +11,6 @@ module.exports = class Routes {
         app.get("/locations",this.location.getLocations)
         app.get("/businessByCategory",this.business.getBusinessListByCategory)
         app.get("/businessDetails",this.business.getBusinessDetailsById)
+        app.get("/search",this.business.search)
     }
 }

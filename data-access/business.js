@@ -26,4 +26,17 @@ module.exports = class BusinessCollection {
         })
         return data;
     }
+    async search(searchString, location_id) {
+        let data = [];
+        data = await new Promise((resolve,reject) => {
+            connection.query("call victory_ads_db.searchByLocation(?,?)", [searchString,location_id], function (err, result) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                }
+            });
+        })
+        return data;
+    }
   };

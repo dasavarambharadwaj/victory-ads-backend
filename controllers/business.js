@@ -9,4 +9,8 @@ module.exports = class Location {
     let result = await object.getBusinessDetailsById(req.query?.business_id);
     res.send(result);
   }
+  async search(req, res, next) {
+    let result = await object.search(req.query?.search, req.query?.location_id);
+    res.send(result);
+  }
 };
