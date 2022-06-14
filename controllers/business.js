@@ -13,4 +13,26 @@ module.exports = class Location {
     let result = await object.search(req.query?.search, req.query?.location_id);
     res.send(result);
   }
+  async getImages(req, res, next) {
+    let result = await object.getImages(req.query?.business_id);
+    res.send(result);
+  }
+  async image(req, res, next) {
+    var options = {
+      root: './images',
+      dotfiles: 'deny',
+      headers: {
+        'x-timestamp': Date.now(),
+        'x-sent': true
+      }
+    }
+    var fileName = req.params.name
+    res.sendFile(fileName, options, function (err) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log('Sent:', fileName)
+      }
+    })
+  }
 };

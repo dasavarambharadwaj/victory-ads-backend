@@ -1,5 +1,7 @@
 const express = require('express');
-const Routes = require('./router')
+const Routes = require('./router');
+const https = require('https');
+const fs = require('fs');
 var cors = require('cors');
 module.exports=class Server {
     constructor(port,originAddress){
@@ -20,8 +22,18 @@ module.exports=class Server {
         this.routes = new Routes(this.app)
     }
     start() {
-        this.app.listen(this.port,()=>{
-            console.log('Server running at port: ' + this.port);
-        });
+        if(process.env.SERVER === "prod") {
+            var options = {
+                key: fs.readFileSync('/etc/letsencrypt/live/victoryads-srd.in/privkey.pem'),
+                cert: fs.readFileSync('/etc/letsencrypt/live/victoryads-srd.in/fullchain.pem'),
+            };
+            https.createServer(options,this.app).listen(this.port,()=>{
+                console.log('Server running at port: ' + this.port);
+            })
+        } else {
+            this.app.listen(this.port,()=>{
+                console.log('Server running at port: ' + this.port);
+            });
+        }
     }
 }
