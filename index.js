@@ -1,5 +1,5 @@
-require('dotenv').config({path:__dirname+"/.env"})
-const expressServer = require('./services/express-server')
+require("dotenv").config({ path: __dirname + "/.env" });
+const expressServer = require("./services/express-server");
 const ConnectDB = require("./services/connect-db");
 (async () => {
   let connectDB = new ConnectDB();

@@ -1,6 +1,10 @@
-const { getAllData, getDataByQuery, addDataToCollection } = require("./common-functions");
+const {
+  getAllData,
+  getDataByQuery,
+  addDataToCollection,
+} = require("./common-functions");
 const dbDetails = require("../static/databaseConfig.json");
-var ObjectId = require('mongodb').ObjectId;
+var ObjectId = require("mongodb").ObjectId;
 module.exports = class CustomerCollection {
   async getCustomersData(searchString) {
     let data = [];
@@ -19,16 +23,21 @@ module.exports = class CustomerCollection {
   async getCustomerDataById(id) {
     let data = [];
     if (id) {
-      let objId = new ObjectId(id)
-      data = await getDataByQuery(dbDetails.databaseName, dbDetails.customer, 
-        {_id: objId});
+      let objId = new ObjectId(id);
+      data = await getDataByQuery(dbDetails.databaseName, dbDetails.customer, {
+        _id: objId,
+      });
     }
     return data;
   }
   async addCustomer(customerData) {
     let data;
     if (customerData) {
-      data = await addDataToCollection(dbDetails.databaseName, dbDetails.tempCustomer,customerData);
+      data = await addDataToCollection(
+        dbDetails.databaseName,
+        dbDetails.tempCustomer,
+        customerData
+      );
     }
     return data;
   }

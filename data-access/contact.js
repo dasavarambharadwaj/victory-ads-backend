@@ -1,11 +1,10 @@
-module.exports = class CustomerCollection {
-  async getCategories(searchString) {
+module.exports = class ContactCollection {
+  async saveContactInfo(body) {
     let data = [];
-    searchString = searchString ? searchString : "";
     data = await new Promise((resolve, reject) => {
       connection.query(
-        "call victory_ads_db.getCategoriesByName(?)",
-        [searchString],
+        "call victory_ads_db.saveContactUsInfo(?,?,?,?)",
+        [body.name, body.email, body.phone, body.query],
         function (err, result) {
           if (err) {
             reject(err);
