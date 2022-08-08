@@ -68,4 +68,23 @@ module.exports = class BusinessCollection {
     });
     return data;
   }
+  async addBusinessInfo(body) {
+    let data = [];
+    console.log(body);
+    data = await new Promise((resolve, reject) => {
+      connection.query(
+        "call victory_ads_db.addBusinessTemp(?,?,?,?,?,?,?)",
+        [body.business_name, body.category_id, body.owner_name, JSON.stringify(body.phone), body.email, body.location_id, body.address],
+        function (err, result) {
+          if (err) {
+            console.log(err)
+            reject(err);
+          } else {
+            resolve(JSON.parse(JSON.stringify(result)));
+          }
+        }
+      );
+    });
+    return data;
+  }
 };

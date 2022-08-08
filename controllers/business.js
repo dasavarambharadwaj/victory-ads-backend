@@ -21,6 +21,15 @@ module.exports = class Location {
       res.next(err);
     }
   }
+  async addBusinessInfo(req, res, next) {
+    try {
+      let result = await object.addBusinessInfo(req.body);
+      res.send(result);
+    } catch (err) {
+      console.log(err)
+      res.next(err);
+    }
+  }
   async search(req, res, next) {
     try {
       let result = await object.search(

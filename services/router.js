@@ -17,5 +17,6 @@ module.exports = class Routes {
     app.get("/getImagesByBusinessId", this.business.getImages);
     app.get("/image/:name", this.business.image);
     app.post("/contactUs", this.contact.saveContactInfo);
+    app.post("/addBusiness", this.business.addBusinessInfo);
   }
 };
