@@ -26,7 +26,7 @@ module.exports = class Location {
       let result = await object.addBusinessInfo(req.body);
       res.send(result);
     } catch (err) {
-      console.log(err)
+      console.log(err);
       res.next(err);
     }
   }
